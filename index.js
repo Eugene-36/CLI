@@ -1,30 +1,51 @@
-// import fs from "fs/promises";
-// import path from "path";
-
-// let fs = require("fs"),
-//   path = require("path"),
-//   util = require("util");
-// let content;
-// console.log(content);
-
-// const contactsPath = fs.readFile(
-//   path.join(__dirname, "db", "contacts.json"),
-//   "utf8",
-//   function (err, data) {
-//     if (err) {
-//       console.log(err);
-//       process.exit(1);
-//     }
-//     content = util.format(data, "test", "test", "test");
-//     console.log(content);
-//   }
-// );
 let contactsRediness = require("./contacts");
 //===========================
+const { Command } = require("commander");
+const program = new Command();
+program
+  .option("-a, --action <type>", "choose action")
+  .option("-i, --id <type>", "user id")
+  .option("-n, --name <type>", "user name")
+  .option("-e, --email <type>", "user email")
+  .option("-p, --phone <type>", "user phone");
 
-console.log(contactsRediness.listContacts()); // => 'function'
-console.log(contactsRediness.getContactById()); // => 'function'
-console.log(contactsRediness.removeContact()); // => undefined
-console.log(contactsRediness.addContact()); // => undefined
+program.parse(process.argv);
+
+const argv = program.opts();
+
+// TODO: рефакторить
+function invokeAction({ action, id, name, email, phone }) {
+  switch (action) {
+    case "list":
+      // ...
+      contactsRediness.listContacts();
+      break;
+
+    case "get":
+      // ... id
+      contactsRediness.getContactById(id);
+      break;
+
+    case "add":
+      // ... name email phone
+      contactsRediness.addContact(name, email, phone);
+      break;
+
+    case "remove":
+      // ... id
+      contactsRediness.removeContact(id);
+      break;
+
+    default:
+    //   console.warn("\x1B[31m Unknown action type!");
+  }
+}
+
+invokeAction(argv);
+
+// console.log(); // => 'function'
+// console.log(); // => 'function'
+// console.log(); // => undefined
+// console.log(); // => undefined
 //console.log(contactsRediness);
 //JSON.parse(data);
