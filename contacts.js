@@ -28,7 +28,7 @@ function listContacts() {
 }
 
 function getContactById(contactId) {
-  // ...твой код
+  
   const fs = require("fs");
 
   fs.readFile(contactsPath, "utf8", (err, data) => {
@@ -44,7 +44,7 @@ function getContactById(contactId) {
 }
 
 function removeContact(contactId) {
-  // ...твой код
+ 
 
   const fs = require("fs");
 
@@ -65,7 +65,7 @@ function removeContact(contactId) {
 }
 
 function addContact(name, email, phone) {
-  // ...твой код
+
   fs.readFile(contactsPath, (err, data) => {
     if (err) {
       throw new Error(err);
