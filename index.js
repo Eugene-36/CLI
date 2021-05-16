@@ -17,35 +17,28 @@ const argv = program.opts();
 function invokeAction({ action, id, name, email, phone }) {
   switch (action) {
     case "list":
-      // ...
+     
       contactsRediness.listContacts();
       break;
 
     case "get":
-      // ... id
+      
       contactsRediness.getContactById(id);
       break;
 
     case "add":
-      // ... name email phone
+     
       contactsRediness.addContact(name, email, phone);
       break;
 
     case "remove":
-      // ... id
       contactsRediness.removeContact(id);
       break;
 
     default:
-    //   console.warn("\x1B[31m Unknown action type!");
+       console.warn("\x1B[31m Unknown action type!");
   }
 }
 
 invokeAction(argv);
 
-// console.log(); // => 'function'
-// console.log(); // => 'function'
-// console.log(); // => undefined
-// console.log(); // => undefined
-//console.log(contactsRediness);
-//JSON.parse(data);

@@ -1,6 +1,4 @@
-//=================================================================
-
-// contacts.js
+const { v4: uuidv4 } = require("uuid");
 
 let fs = require("fs"),
   path = require("path"),
@@ -68,8 +66,17 @@ function removeContact(contactId) {
 
 function addContact(name, email, phone) {
   // ...твой код
-
-  console.log("Работает");
+  fs.readFile(contactsPath, (err, data) => {
+    if (err) {
+      throw new Error(err);
+    }
+    console.log(data);
+    const contacts = JSON.parse(data);
+    console.log(contacts);
+    const content = { id: uuidv4(), name: name, email: email, phone: phone };
+    const newData = [...contacts, content];
+    console.log(newData);
+  });
 }
 
 module.exports = {
